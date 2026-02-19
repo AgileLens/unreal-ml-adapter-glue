@@ -24,7 +24,7 @@ public:
     // Simple accessor for the active client socket – used by the Blueprint function library.
     static FSocket* GetConnectionSocket()
     {
-        return ConnectionSocket;
+        return GMLAdapterModule ? GMLAdapterModule->ConnectionSocket : nullptr;
     }
 };
 

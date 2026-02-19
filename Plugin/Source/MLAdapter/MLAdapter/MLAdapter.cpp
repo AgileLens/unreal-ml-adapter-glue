@@ -6,8 +6,12 @@
 
 #define LOG_CATEGORY LogTemp
 
+// Global pointer to the module instance for static access
+static FMLAdapterModule* GMLAdapterModule = nullptr;
+
 void FMLAdapterModule::StartupModule()
 {
+    GMLAdapterModule = this;
     StartServer();
     UE_LOG(LOG_CATEGORY, Log, TEXT("MLAdapter module started, server listening"));
 }
@@ -17,6 +21,7 @@ void FMLAdapterModule::ShutdownModule()
     bShouldStop = true;
     StopServer();
     UE_LOG(LOG_CATEGORY, Log, TEXT("MLAdapter module stopped"));
+    GMLAdapterModule = nullptr;
 }
 
 void FMLAdapterModule::StartServer()
