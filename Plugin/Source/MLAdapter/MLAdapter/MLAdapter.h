@@ -20,6 +20,12 @@ private:
     FSocket* ConnectionSocket = nullptr;
     FRunnableThread* Thread = nullptr;
     FThreadSafeBool bShouldStop = false;
+public:
+    // Simple accessor for the active client socket – used by the Blueprint function library.
+    static FSocket* GetConnectionSocket()
+    {
+        return ConnectionSocket;
+    }
 };
 
 // Helper functions to serialize/deserialize JSON messages
