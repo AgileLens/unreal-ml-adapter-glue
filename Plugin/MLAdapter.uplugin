@@ -1,0 +1,18 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "1.0",
+    "FriendlyName": "ML Adapter",
+    "Description": "Bridge between Unreal Engine and external ML processes via TCP sockets.",
+    "Category": "Utilities",
+    "CreatedBy": "Sam (OpenClaw)",
+    "CreatedCategory": "AI",
+    "EnabledByDefault": true,
+    "Modules": [
+        {
+            "Name": "MLAdapter",
+            "Type": "Runtime",
+            "LoadingPhase": "Default"
+        }
+    ]
+}
