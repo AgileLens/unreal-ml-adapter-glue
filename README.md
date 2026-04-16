@@ -70,6 +70,14 @@ The JSON schema is deliberately simple:
 ```
 You can extend it by editing `MLAdapter.h` – just keep the socket read/write logic unchanged.
 
+## Things to Try
+
+1. **Install the plugin, open your UE5 project, and add a `SendActorState` Blueprint node to a character's Event Tick** — the node completes on the first tick and returns a `Prediction` struct; log it to the screen to see the raw socket round-trip working.
+2. **Run `python3 external/inference.py` in a terminal** — the script connects to `localhost:5555`, receives actor JSON each tick, and sends back a small random offset; the Blueprint node's output should now reflect the Python process's response.
+3. **Apply the `Prediction.position` offset to the actor's location in Blueprint** — the character should jitter slightly each frame as the dummy model perturbs its position; this confirms the full UE → Python → UE loop is live.
+4. **Edit `inference.py` to replace the random offset with a real ONNX model inference** — no UE recompile needed; restart the Python script and the new model predictions flow immediately into the running session.
+5. **Extend the JSON schema with a custom field** (e.g. `"health": 100`) by editing `MLAdapter.h` — add the field in C++, send it from Blueprint, read it in Python, and send a modified value back; verify the round-trip in the Blueprint log.
+
 ## FAQ
 
 - **Q:** *Do I need to rebuild the plugin for every model change?*
